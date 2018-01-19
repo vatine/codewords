@@ -1,0 +1,13 @@
+syntax = "proto3";
+
+message CodewordsRequest {
+	int32 count = 1;
+}
+
+message CodewordsResponse {
+	repeated string words = 2;
+}
+
+service CodewordsService {
+  rpc GetCodewords(CodewordsRequest) returns (CodewordsResponse) {}
+}
