@@ -1,18 +1,16 @@
 package backend
 
 import (
-	"context"
+	"errors"
+	"fmt"
+	"io"
 	"math/rand"
 	"strings"
-
-        // "google.golang.org/grpc"
-
-        // "google.golang.org/grpc/reflection"
-	
-	cw "github.com/vatine/codewords"
+	"sync"
 )
 
 var generated map[int64]bool
+var stateLock sync.Mutex
 
 var adjectives = []string {
 	"tall",
@@ -39,8 +37,7 @@ var nouns = []string {
 }
 
 var rndN func(int) int
-
-type server struct{}
+var maxConsecutiveCollisions int = 3
 
 func GetAdjective() (string, int) {
 	n := rndN(len(adjectives))
@@ -69,29 +66,42 @@ func composite(a, b int) int64 {
 	return (n1 << 32) | n2
 }
 
-func GeneratePair() string {
-	for true {
+func GeneratePair() (string, error) {
+	stateLock.Lock()
+	defer stateLock.Unlock()
+	for c := 0; c < maxConsecutiveCollisions; c++ {
 		adj, adjN := GetAdjective()
 		noun, nounN := GetNoun()
 		comp := composite(adjN, nounN)
 		if !generated[comp] {
 			generated[comp] = true
-			return strings.Join([]string{adj, noun}, " ")
+			return strings.Join([]string{adj, noun}, " "), nil
 		}
 	}
-	return ""
+	return "", errors.New("Too many collisions")
 }
 
-func GenerateNPairs(n int) []string {
+func GenerateNPairs(n int32) ([]string, error) {
 	var rv []string
 
-	for i := 0; i < n; i++ {
-		rv = append(rv, GeneratePair())
+	for i := int32(0); i < n; i++ {
+		s, e := GeneratePair()
+		if e != nil {
+			rv = append(rv, s)
+		} else {
+			return rv, e
+		}
 	}
 
-	return rv
+	return rv, nil
 }
 
-func (s *server) GetCodewords(ctx context.Context, in *cw.CodewordsRequest) (*cw.CodewordsResponse, error) {
-	return nil, nil
+func PersistGenerated(w io.Writer) {
+	for ix, _ := range generated {
+		fmt.Fprintf(w, "%x\n", ix)
+	}
+}
+
+func ReadGenerated(r io.Reader) {
+	
 }

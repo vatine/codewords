@@ -52,11 +52,11 @@ func TestNouns(t *testing.T) {
 func TestGenerated(t *testing.T) {
 	reset()
 	GenRandSeq(0, 0, 0, 0, 0, 1)
-	w1 := GeneratePair()
+	w1, _ := GeneratePair()
 	if w1 != "tall aardvark" {
 		t.Errorf("Expected a tall aardvark, saw %s", w1)
 	}
-	w2 := GeneratePair()
+	w2, _ := GeneratePair()
 	if w2 != "tall wombat" {
 		t.Errorf("Expected a tall wombat, saw %s", w2)
 	}
@@ -67,7 +67,7 @@ func TestGenerated(t *testing.T) {
 func TestMultiGenerated(t *testing.T) {
 	reset()
 	GenRandSeq(0, 0, 0, 0, 0, 1, 1, 0)
-	seen := GenerateNPairs(3)
+	seen, _ := GenerateNPairs(3)
 	expected := []string{"tall aardvark", "tall wombat", "short aardvark"}
 
 	for ix, s := range seen {
