@@ -15,7 +15,7 @@ import (
 	"google.golang.org/grpc/reflection"
 )
 
-var port = flag.String("-port", ":8080", "Port to listen to, for grpc")
+var port = flag.String("-port", ":8090", "Port to listen to, for grpc")
 var promPort = flag.String("-monitoring", ":8081", "Port to listen to ,for monitoring")
 
 func main () {

@@ -2,9 +2,10 @@ package frontend
 
 import (
 	"errors"
+	"fmt"
 	"sync"
 	
-	"golang.org/x/net/context"
+ 	"golang.org/x/net/context"
 	"google.golang.org/grpc"
 	cw "github.com/vatine/codewords"
 )
@@ -35,6 +36,7 @@ func SetMaximumCacheSize(n int) {
 func init() {
 	SetMinimumCacheSize(1)
 	SetMaximumCacheSize(5)
+	cache = []string{}
 }
 
 // Refill the cache, expects to be called with the cacheLock held,
@@ -45,7 +47,9 @@ func refillCache(ctx context.Context) error {
 	if needed <= 0 {
 		needed = 1
 	}
-	r, err := client.GetCodewords(ctx, &cw.CodewordsRequest{Count: int32(needed)})
+	req := cw.CodewordsRequest{Count: int32(needed)}
+	fmt.Printf("%s %s\n", ctx, &req)
+	r, err := client.GetCodewords(ctx, &req)
 
 	for _, word := range r.Words {
 		// Despite errors, we may still have words
