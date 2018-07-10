@@ -48,9 +48,12 @@ func refillCache(ctx context.Context) error {
 		needed = 1
 	}
 	req := cw.CodewordsRequest{Count: int32(needed)}
-	fmt.Printf("%s %s\n", ctx, &req)
 	r, err := client.GetCodewords(ctx, &req)
 
+	if err != nil {
+		fmt.Printf("refillCache error: %s\n", err)
+		return err
+	}
 	for _, word := range r.Words {
 		// Despite errors, we may still have words
 		cache = append(cache, word)
