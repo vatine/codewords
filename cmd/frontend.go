@@ -15,7 +15,7 @@ import (
 )
 
 var port = flag.String("-port", ":8080", "Port to listen to")
-var backend = flag.String("-backend", "http://localhost:8090", "Backend URL")
+var backend = flag.String("-backend", "localhost:8090", "Backend URL")
 
 func mainPage(w http.ResponseWriter, r *http.Request) {
 	fmt.Fprintln(w, "<html><head><title>Codewords</title></head>")
