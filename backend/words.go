@@ -87,9 +87,10 @@ func GenerateNPairs(n int32) ([]string, error) {
 	for i := int32(0); i < n; i++ {
 		s, e := GeneratePair()
 		if e != nil {
-			rv = append(rv, s)
-		} else {
+			fmt.Printf("backend error: %s\n", e)
 			return rv, e
+		} else {
+			rv = append(rv, s)
 		}
 	}
 
