@@ -16,7 +16,7 @@ import (
 )
 
 var port = flag.String("-port", ":8090", "Port to listen to, for grpc")
-var promPort = flag.String("-monitoring", ":8081", "Port to listen to ,for monitoring")
+var promPort = flag.String("-monitoring", ":8081", "Port to listen to, for monitoring")
 
 func main () {
 	flag.Parse()
