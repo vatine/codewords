@@ -14,7 +14,12 @@ The frontend(s) and backend communicate using grpc, the user(s) and frontend(s) 
 
 ## Running
 
-Launch both the front-end and back-end commands in the cmd directory:
+Get required dependencies:
+```bash
+go get
+```
+
+Launch both the front-end and back-end commands that are in the cmd directory:
 ```bash
 go run cmd/frontend.go &   # run in background
 go run cmd/backend.go
