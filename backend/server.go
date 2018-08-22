@@ -1,9 +1,8 @@
 package backend
 
 import (
-	"fmt"
-	"golang.org/x/net/context"
 	cw "github.com/vatine/codewords"
+	"golang.org/x/net/context"
 )
 
 type Server struct{}

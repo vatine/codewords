@@ -13,7 +13,7 @@ func GenRandSeq(n ...int) {
 	ix := 0
 	l := len(n)
 	rndN = func(m int) int {
-		base := n[ix % l]
+		base := n[ix%l]
 		ix = ix + 1
 		return base % m
 	}
@@ -60,8 +60,7 @@ func TestGenerated(t *testing.T) {
 	if w2 != "tall wombat" {
 		t.Errorf("Expected a tall wombat, saw %s", w2)
 	}
-	
-	
+
 }
 
 func TestMultiGenerated(t *testing.T) {

@@ -3,10 +3,10 @@ package frontend
 import (
 	"fmt"
 	"testing"
-	
+
+	cw "github.com/vatine/codewords"
 	"golang.org/x/net/context"
 	"google.golang.org/grpc"
-	cw "github.com/vatine/codewords"
 )
 
 type mockServer struct {
@@ -29,7 +29,7 @@ func (s *mockServer) GetCodewords(ctx context.Context, r *cw.CodewordsRequest, o
 func TestNextCodeword1and5(t *testing.T) {
 	td := []struct {
 		count int
-		e string
+		e     string
 	}{
 		{1, "testing0"}, {1, "testing1"}, {1, "testing2"},
 		{1, "testing3"}, {2, "testing4"}, {2, "testing0"},
@@ -56,7 +56,7 @@ func TestNextCodeword1and5(t *testing.T) {
 func TestNextCodeword1and6(t *testing.T) {
 	td := []struct {
 		count int
-		e string
+		e     string
 	}{
 		{1, "testing0"}, {1, "testing1"}, {1, "testing2"},
 		{1, "testing3"}, {1, "testing4"}, {2, "testing5"},

@@ -1,9 +1,9 @@
 package backend
 
 import (
+	cw "github.com/vatine/codewords"
 	"golang.org/x/net/context"
 	"testing"
-	cw "github.com/vatine/codewords"
 )
 
 func TestAssignment(t *testing.T) {
