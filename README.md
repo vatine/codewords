@@ -14,13 +14,30 @@ The frontend(s) and backend communicate using grpc, the user(s) and frontend(s) 
 
 ## Running
 
+Tested on the standard Centos 7.5 image from Digital Ocean:
+
+```bash
+yum -y install git golang
+```
+
+And Ubuntu 18.04:
+
+```bash
+apt-get update
+apt-get install golang-go
+useradd -m -s /bin/bash bunty
+su - bunty
+```
+
 Get required dependencies:
 ```bash
+git clone https://github.com/vatine/codewords.git
+cd codewords/cmd
 go get
 ```
 
 Launch both the front-end and back-end commands that are in the cmd directory:
 ```bash
-go run cmd/frontend.go &   # run in background
-go run cmd/backend.go
+go run backend.go &   # run in background
+go run frontend.go
 ```
