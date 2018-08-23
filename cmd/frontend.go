@@ -6,12 +6,12 @@ import (
 	"fmt"
 	"google.golang.org/grpc"
 	"net/http"
-	
+
 	"github.com/vatine/codewords/frontend"
 
 	//	"github.com/prometheus/client_golang/prometheus"
 	"github.com/prometheus/client_golang/prometheus/promhttp"
- 	"golang.org/x/net/context"
+	"golang.org/x/net/context"
 )
 
 var port = flag.String("-port", ":8080", "Port to listen to")
@@ -38,12 +38,12 @@ func getCodeword(w http.ResponseWriter, r *http.Request) {
 	fmt.Fprintf(w, "Your codeword is <b>%s</b><p>\n", codeword)
 	renderForm(w, r)
 	fmt.Fprintln(w, "</body></html>")
-	
+
 }
 
-func main () {
+func main() {
 	flag.Parse()
-	
+
 	_, err := frontend.Connect(*backend, grpc.WithInsecure())
 	if err != nil {
 		fmt.Printf("Error connecting to the backend, %s\n", err)

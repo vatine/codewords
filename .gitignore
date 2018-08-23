@@ -1,1 +1,3 @@
-*.pb.go
+cmd/backend
+cmd/frontend
+

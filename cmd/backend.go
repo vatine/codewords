@@ -2,13 +2,13 @@
 package main
 
 import (
-	"fmt"
 	"flag"
+	"fmt"
 	"net"
 	"net/http"
-	
-	"github.com/vatine/codewords/backend"
+
 	cw "github.com/vatine/codewords"
+	"github.com/vatine/codewords/backend"
 
 	"github.com/prometheus/client_golang/prometheus/promhttp"
 	"google.golang.org/grpc"
@@ -18,10 +18,10 @@ import (
 var port = flag.String("-port", ":8090", "Port to listen to, for grpc")
 var promPort = flag.String("-monitoring", ":8081", "Port to listen to, for monitoring")
 
-func main () {
+func main() {
 	flag.Parse()
 	s := grpc.NewServer()
-	
+
 	cw.RegisterCodewordsServiceServer(s, &backend.Server{})
 	// Register reflection service on gRPC server.
 	reflection.Register(s)
@@ -30,7 +30,7 @@ func main () {
 		fmt.Printf("Unable to alocate GRPC service port, %s\n", err)
 		return
 	}
-	
+
 	http.Handle("/metrics", promhttp.Handler())
 	go http.ListenAndServe(*promPort, nil)
 	if err := s.Serve(listener); err != nil {

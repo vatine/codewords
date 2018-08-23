@@ -12,7 +12,7 @@ import (
 var generated map[int64]bool
 var stateLock sync.Mutex
 
-var adjectives = []string {
+var adjectives = []string{
 	"tall",
 	"short",
 	"old",
@@ -28,7 +28,7 @@ var adjectives = []string {
 	"fresh",
 	"purple",
 }
-var nouns = []string {
+var nouns = []string{
 	"aardvark",
 	"wombat",
 	"boat",
@@ -104,5 +104,5 @@ func PersistGenerated(w io.Writer) {
 }
 
 func ReadGenerated(r io.Reader) {
-	
+
 }

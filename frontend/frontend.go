@@ -4,10 +4,10 @@ import (
 	"errors"
 	"fmt"
 	"sync"
-	
- 	"golang.org/x/net/context"
-	"google.golang.org/grpc"
+
 	cw "github.com/vatine/codewords"
+	"golang.org/x/net/context"
+	"google.golang.org/grpc"
 )
 
 // Some pre-fetched codewords, for quicker dispatch
