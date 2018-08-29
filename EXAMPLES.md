@@ -12,7 +12,12 @@ myCnt.Inc()
 
 ```go
 // creating a histogram metric
-myHisto := prometheus.NewHistogram(prometheus.HistogramOpts{Name: "…", Help: "…", Buckets: prometheus.LinearBuckets(1, 3, 5),})
+myHisto := prometheus.NewHistogram(
+	prometheus.HistogramOpts{
+		Name: "…", Help: "…",
+		Buckets: prometheus.LinearBuckets(1, 3, 5),
+	}
+)
 // registering
 prometheus.MustRegister(myHisto)
 // using
