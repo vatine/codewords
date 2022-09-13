@@ -32,12 +32,14 @@ su - bunty
 Get required dependencies:
 ```bash
 git clone https://github.com/vatine/codewords.git
-cd codewords/cmd
-go get
 ```
+
+The dependencies will then be fetched at the correct version on build/run.
 
 Launch both the front-end and back-end commands that are in the cmd directory:
 ```bash
 go run backend.go &   # run in background
 go run frontend.go
 ```
+
+There are some examples of metrics in EXAMPLES.md
